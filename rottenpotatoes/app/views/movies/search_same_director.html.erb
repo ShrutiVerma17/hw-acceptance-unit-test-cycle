@@ -1,0 +1,15 @@
+<!--  app/views/movies/search_same_director.html.erb -->
+<h2>Movies with the same director as <em><%= @movie.title %></em></h2>
+
+<% if @movies_with_same_director.nil? %>
+  '<%= @movie.title =%>' has no director info. 
+<% else %>
+<ul id="details">
+  <% @movies_with_same_director.each do |movie_title| %>
+  <li>
+    <%= movie_title %>
+  </li>
+  <% end %>
+</ul>
+<% end %> 
+ <%= link_to 'Back to movie list', movies_path, :class => 'btn btn-primary col-2' %>
