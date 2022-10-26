@@ -23,4 +23,26 @@ describe MoviesController do
       expect(response).to redirect_to(root_url)
     end
   end
+
+  describe 'GET index' do
+    it 'should render the index template' do
+      get :index
+      expect(response).to render_template('index')
+    end
+  end
+
+  describe 'POST #create' do
+    it 'creates a new movie' do
+      expect {post :create, movie: {:title => "Random Movie 4"}}.to change {Movie.count}.by(1)
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    Movie.create(:title=> "Random Movie 5", :director=>"Steven Spielberg")
+    # movie_id = Movie.find_by(:title => "Random Movie 5").id
+    # byebug
+    it 'destroys movie' do
+      expect {delete :destroy, id: Movie.first.id}.to change{Movie.count}.by(-1)
+    end
+  end
 end

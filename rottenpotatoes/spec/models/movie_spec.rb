@@ -2,12 +2,14 @@ require 'rails_helper'
 
 describe Movie do
   describe '.others_by_same_director' do
+    Movie.delete_all
+    ids = Movie.find_by(:title =>"Random Movie 1")
     Movie.create(:title=> "Random Movie 1", :director=>"Steven Spielberg")
     Movie.create(:title=> "Random Movie 2", :director=>"Steven Spielberg")
     Movie.create(:title=>"Random Movie 3")
     context 'director exists' do
       it 'finds similar movies' do
-        expect(Movie.others_by_same_director('Random Movie 1')).to eql(["Random Movie 1", "Random Movie 2"])
+        expect(Movie.others_by_same_director('Random Movie 1')).to eq(["Random Movie 1", "Random Movie 2"])
       end
     end
     
